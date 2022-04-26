@@ -1,12 +1,15 @@
 from WordList import WordList
-
+allwords="data/official/combined_wordlist.txt"
+shuffled_words="data/official/shuffled_real_wordles.txt"
+# allwords="data/Español/cinco.txt"
+# shuffled_words="data/Español/cinco_random.txt"
 
 class WordleJudge:
     """
     Helper class to take into account how common words are in the English language.
     """
 
-    def __init__(self, words=WordList("data/official/combined_wordlist.txt").words,
+    def __init__(self, words=WordList(allwords).words,
                  common_words=WordList("data/other/common_words.txt").words):
         self.common_words = common_words
         self.probability = {}

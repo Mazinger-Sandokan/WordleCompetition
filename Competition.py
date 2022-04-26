@@ -11,11 +11,16 @@ from pytablewriter.style import Style
 from WordList import *
 from WordleAI import *
 from ai_implementations import LetterPopularityAI
+##Routs for worlists
 
 
+# allwords="data/official/combined_wordlist.txt"
+# shuffled_words="data/official/shuffled_real_wordles.txt"
+allwords="data/Español/cinco.txt"
+shuffled_words="data/Español/cinco_random.txt"
 class Competition:
 
-    def __init__(self, competitor_directory, wordlist_filename="data/official/combined_wordlist.txt", hard_mode=False):
+    def __init__(self, competitor_directory, wordlist_filename=allwords, hard_mode=False):
         self.competitor_directory = competitor_directory
         self.wordlist = WordList(wordlist_filename)
         self.words = self.wordlist.get_list_copy()
@@ -66,7 +71,7 @@ class Competition:
                 break
         return success, guesses
 
-    def fight(self, rounds, print_details=False, solution_wordlist_filename='data/official/combined_wordlist.txt',
+    def fight(self, rounds, print_details=False, solution_wordlist_filename=allwords,
               shuffle=False):
         print("Start tournament")
         result = {}
@@ -81,8 +86,10 @@ class Competition:
             guesses[competitor] = []
             points[competitor] = []
         fight_words = WordList(solution_wordlist_filename).get_list_copy()
+        print(len(fight_words))
         start = time.time()
         competitor_times = np.zeros(len(self.competitors))
+        print(len(fight_words))
         for r in range(rounds):
             word = random.choice(fight_words) if shuffle else fight_words[r]
             current_time = time.time() - start
@@ -143,8 +150,8 @@ def main():
     np.set_printoptions(threshold=np.inf)
     np.set_printoptions(suppress=True)
 
-    competition = Competition("ai_implementations", wordlist_filename="data/official/combined_wordlist.txt", hard_mode=False)
-    competition.fight(rounds=1000, solution_wordlist_filename="data/official/shuffled_real_wordles.txt", print_details=False)
+    competition = Competition("My_tries", wordlist_filename=allwords, hard_mode=False)
+    competition.fight(rounds=200, solution_wordlist_filename=shuffled_words, print_details=False)
 
 if __name__ == "__main__":
     main()
